@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Matrix {
     private int m, n;
-    private long[][] matrix;
+    private int[][] matrix;
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RESET = "\u001B[0m";
 
@@ -28,7 +28,12 @@ public class Matrix {
         int Rows = 0;
         int Columns;
         int Count = 0;
-
+        try {
+            Thread.sleep(1000);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         while(scanner1.hasNextLine()){ // Find rows
             scanner1.nextLine();
             Rows++;
@@ -40,7 +45,7 @@ public class Matrix {
 
         Columns = Count/Rows;  // Calculate columns
 
-        long[][] k = new long[Rows][Columns];
+        int[][] k = new int[Rows][Columns];
         // Creating matrix
         for (int i = 0; i < Rows; i++)
             for(int j = 0; j < Columns; j++) {
@@ -70,7 +75,7 @@ public class Matrix {
         n = n;
     }
 
-    public void setMatrix(long[][] matrix) {
+    public void setMatrix(int[][] matrix) {
         this.matrix = matrix;
     }
 
@@ -83,7 +88,7 @@ public class Matrix {
         return n;
     }
 
-    public long[][] getMatrix() {
+    public int[][] getMatrix() {
         return matrix;
     }
 

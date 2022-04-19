@@ -49,20 +49,20 @@ public class Main {
 
         MatrixRowSumParallel parallel = new MatrixRowSumParallel(matrix, threshold);
 
+        startTime = System.currentTimeMillis();
+        long[] parallelResult = parallel.sumRows(matrix.getMatrix());
+        endTime = System.currentTimeMillis();
+        parallelTime = endTime - startTime;
+        System.out.println("parallelTime = " + parallelTime);
 
         startTime = System.currentTimeMillis();
         long[] serialResult = serial.sumRows(matrix.getMatrix());
         endTime = System.currentTimeMillis();
         serialTime = endTime - startTime;
-        System.out.println("serial: " + serialTime);
+        System.out.println("serialTime = " + serialTime);
 
-        startTime = System.currentTimeMillis();
 
-        long[] parallelResult = parallel.sumRows(matrix.getMatrix());
-        endTime = System.currentTimeMillis();
 
-        parallelTime = endTime - startTime;
-        System.out.println("parallel: " + parallelTime);
 
         System.out.println(Arrays.toString(matrix.getMatrix()[0]) + "\n");
         System.out.println(Arrays.toString(serialResult) + "\n");

@@ -4,14 +4,11 @@ public class MatrixRowSumParallelTask extends RecursiveAction {
 
     //initialisation of class variables
 
-    private long[][] matrix;
+    private int[][] matrix;
     long[] result;
     private int startIndex, endIndex, threshold;
-
-
-
     //constructor for class
-    public MatrixRowSumParallelTask(long[][] matrix,
+    public MatrixRowSumParallelTask(int[][] matrix,
                                    long[] result,
                                    int threshold,
                                    int first,
@@ -21,18 +18,13 @@ public class MatrixRowSumParallelTask extends RecursiveAction {
         this.threshold = threshold;
         this.startIndex = first;
         this.endIndex = last;
-
     }
-
     protected void compute() {
-
         if (endIndex - startIndex < threshold) {
-            //do task directly
             matrixRowSum();
         } else {
             //split the task into two subtasks
             int middle = (startIndex + endIndex)/2;
-
             MatrixRowSumParallelTask t1 = new MatrixRowSumParallelTask(	matrix,
                                                                         result,
                                                                         threshold,
@@ -47,20 +39,12 @@ public class MatrixRowSumParallelTask extends RecursiveAction {
 
             //invoke tasks and await results
             invokeAll(t1, t2);
-
-
         }
-
-
     }
-
     protected void matrixRowSum() {
         for(int i = startIndex; i<endIndex; i++){
-            for(int j = 0; j<matrix[0].length; j++){
+            for(int j = 0; j<matrix[0].length; j++)
                 result[i] += matrix[i][j];
-            }
         }
     }
-
-
 }
