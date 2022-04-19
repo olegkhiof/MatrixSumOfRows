@@ -4,7 +4,8 @@ import java.util.concurrent.TimeUnit;
 public class MatrixRowSumParallel {
     private static int N, M;
     private static int threshold;
-    private int[][] matrix;
+    private static int[][] matrix;
+    static double parallelTime;
 
 
     public MatrixRowSumParallel (Matrix matrix, int threshold){
@@ -15,15 +16,20 @@ public class MatrixRowSumParallel {
     }
 
     public static long[] sumRows(int[][] matrix){
-        ForkJoinPool pool= ForkJoinPool.commonPool();
+        ForkJoinPool pool= new ForkJoinPool(8);
         long[] result = new long[N];
         MatrixRowSumParallelTask task = new MatrixRowSumParallelTask(matrix, result, threshold, 0, N);
-
+        double startTime = System.currentTimeMillis();
         pool.invoke(task);
-        result = task.result;
+        double endTime = System.currentTimeMillis();
+        parallelTime = endTime - startTime;
+        result = task.getResult();
         return result;
 
-    } 
+    }
+    public double getParallelTime(){
+        return parallelTime;
+    }
 
 
 }

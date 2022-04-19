@@ -7,21 +7,15 @@ import java.util.Scanner;
 public class Main {
     //ignore ripped off https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+
 
     static String fileName;
 
     public static void main(String args[]) throws IOException{
         String[] fileNameArray;
         int threshold = 0;
-        boolean ok = false;
         double startTime, endTime, serialTime, parallelTime;
 
         //ascii logo
@@ -32,7 +26,7 @@ public class Main {
 
         //verifies that userinput matches a file in the Input folder.
         inputVerifier(inputReader(), fileNameArray);
-
+        System.out.println("cpu : " + Runtime.getRuntime().availableProcessors());
         System.out.println("File: \"" + fileName + "\" is being read... ");
         Matrix matrix = new Matrix(fileName);
         System.out.println(ANSI_GREEN + "Matrix loaded!" + ANSI_RESET);
@@ -49,10 +43,9 @@ public class Main {
 
         MatrixRowSumParallel parallel = new MatrixRowSumParallel(matrix, threshold);
 
-        startTime = System.currentTimeMillis();
+
         long[] parallelResult = parallel.sumRows(matrix.getMatrix());
-        endTime = System.currentTimeMillis();
-        parallelTime = endTime - startTime;
+        parallelTime = parallel.getParallelTime();
         System.out.println("parallelTime = " + parallelTime);
 
         startTime = System.currentTimeMillis();
@@ -60,6 +53,9 @@ public class Main {
         endTime = System.currentTimeMillis();
         serialTime = endTime - startTime;
         System.out.println("serialTime = " + serialTime);
+
+        System.out.println("Speedup: "+ serialTime/parallelTime);
+        System.out.println("Efficiency: " + (serialTime/parallelTime)/Runtime.getRuntime().availableProcessors());
 
 
 
