@@ -54,6 +54,9 @@ public class Matrix {
         n = Rows;
         m = Columns;
         matrix = k;
+        scanner1.close();
+        scanner2.close();
+        scanner3.close();
     }
 
     public void writeToFile(String fileName){

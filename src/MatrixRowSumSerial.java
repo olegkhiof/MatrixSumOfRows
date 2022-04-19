@@ -2,10 +2,11 @@
 
 public class MatrixRowSumSerial {
     private static int N;
+    private static int[][] matrix;
 
     public MatrixRowSumSerial(Matrix matrix) {
-        int[][] matrix1 = matrix.getMatrix();
-        N = matrix.getN();
+        this.matrix = matrix.getMatrix();
+        this.N = matrix.getN();
     }
 
 

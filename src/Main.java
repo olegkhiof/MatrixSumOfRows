@@ -64,7 +64,6 @@ public class Main {
 
 
 
-        System.out.println(Arrays.toString(matrix.getMatrix()[0]) + "\n");
         System.out.println(Arrays.toString(serialResult) + "\n");
         System.out.println(Arrays.toString(parallelResult));
 
